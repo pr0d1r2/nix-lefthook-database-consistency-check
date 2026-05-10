@@ -1,0 +1,6 @@
+---
+pre-push:
+  commands:
+    database-consistency-check:
+      glob: "{app/models/**/*.rb,engines/*/app/models/**/*.rb,db/migrate/**}"
+      run: timeout ${LEFTHOOK_DATABASE_CONSISTENCY_CHECK_TIMEOUT:-60} lefthook-database-consistency-check
