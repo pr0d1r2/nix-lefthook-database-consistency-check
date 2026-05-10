@@ -11,14 +11,14 @@ config="${LEFTHOOK_DATABASE_CONSISTENCY_CONFIG:-.database_consistency.todo.yml}"
 
 config_args=()
 if [ -f "$config" ]; then
-  config_args=(-c "$config")
+    config_args=(-c "$config")
 fi
 
 output=$(bundle exec database_consistency "${config_args[@]}" 2>/dev/null | grep -v "^Loaded configurations:" || true)
 
 if [ -n "$output" ]; then
-  echo "$output"
-  if echo "$output" | grep -q " fail "; then
-    exit 1
-  fi
+    echo "$output"
+    if echo "$output" | grep -q " fail"; then
+        exit 1
+    fi
 fi
